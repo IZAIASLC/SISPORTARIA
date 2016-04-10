@@ -1,0 +1,130 @@
+﻿<fildset>
+    <legend>Informações do Morador</legend>
+ 
+       <div class=" col-md-12">
+ 
+           <div class="foto">
+
+               foto
+           </div>
+           <div class="cont">
+         <div class="col-sm-6">
+                <label class="control-label">Nome:</label>
+                <input type="text" id="Nome" name="Nome" class="form-control"
+                       ng-model="morador.Nome" ng-required="true"  />
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">CPF:</label>
+                <input type="text" id="Cpf" name="Cpf" class="form-control"
+                       ng-model="morador.Cpf" ng-required="true"  mask="000.000.000-00" ng-blur="pesquisarCpf()" />
+            </div>
+             <div class="col-md-3">
+                <label class="control-label">Identidade:</label>
+                <input type="text" id="Identidade" name="Identidade" class="form-control"
+                       ng-model="morador.Identidade" ng-required="true"  />
+            </div>
+
+             <div class="col-sm-6">
+                <label class="control-label">Endereço:</label>
+                <input type="text" id="Text1" name="Endereco" class="form-control"
+                       ng-model="morador.Endereco" ng-required="true"  />
+            </div>
+           <div class="col-md-4">
+                <label class="control-label">Sexo:</label>
+          
+                  <div  class="form-control" >
+                <input type="radio"  name="Sexo"  ng-model="morador.Sexo" value="0"/> Masculino
+                 <input type="radio"  name="Sexo"  ng-model="morador.Sexo" value="1" /> Feminino
+                  </div>  
+
+            </div>
+               </div>
+          </div> 
+            
+             
+
+  
+          
+
+   </fildset>
+
+<fildset ng-show="morador.Dependentes.length>0">
+
+    <legend>Informações do(s) Dependente(s)</legend>
+<div class="col-md-12">
+  
+    <table class="table table-bordered table-striped">
+        <thead>
+            <th>Nome:</th>
+            <th></th>
+            
+        </thead>
+       
+        <tbody>
+            <tr ng-repeat="dependente in morador.Dependentes">
+                <td>{{dependente.Nome}}</td>
+                <td>
+
+                      <a ng-click="editar(dependente)" style="cursor: pointer" data-toggle="modal" data-target="#modalDependentes" title="Editar" class="glyphicon glyphicon-edit"></a>
+                     <a ng-click="remover(dependente)"  data-toggle="popover" title="Excluir" class="glyphicon glyphicon-trash" style="cursor:pointer"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</fildset>
+
+
+<div class="col-md-12 text-right">
+    <a class="btn btn adicionar  " data-toggle="modal" data-target="#modalDependentes">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Novo Dependente
+    </a>
+    <hr />
+
+</div>
+
+
+<div class="modal fade" id="modalDependentes">
+
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cadastro de Dependentes</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            <label class="control-label">Nome:</label>
+                            <input type="text" id="Text2" name="Nome" class="form-control"
+                                ng-model="dependente.Nome" ng-required="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
+                <input type="button" id="Adicionar" ng-click="adicionar(dependente)" name="Dependentes" value="Adicionar"
+                    class="btn btn-primary" />
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-md-12 text-right">
+    <button type="button" class="btn btn-primary" ng-click="salvar()" title="Salvar">Salvar</button>
+    <a class="btn btn-warning" href="#/Morador/">Voltar</a>
+</div>
+
+

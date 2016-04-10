@@ -1,0 +1,45 @@
+﻿<fildset>
+    <legend>Informações do Visitante</legend>
+ 
+            <div class="col-sm-6">
+                <label class="control-label">Nome:</label>
+                <input type="text" id="Nome" name="Nome" class="form-control"
+                       ng-model="visitante.Nome" ng-required="true"  />
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">CPF:</label>
+                <input type="text" id="Cpf" name="Cpf" class="form-control"
+                       ng-model="visitante.Cpf" ng-required="true"  mask="000.000.000-00" ng-blur="pesquisarCpf()" />
+            </div>
+             <div class="col-md-3">
+                <label class="control-label">Identidade:</label>
+                <input type="text" id="Identidade" name="Identidade" class="form-control"
+                       ng-model="visitante.Identidade" ng-required="true"  />
+            </div>
+             
+  
+ 
+            <div class="col-sm-6">
+                <label class="control-label">Endereço:</label>
+                <input type="text" id="Text1" name="Endereco" class="form-control"
+                       ng-model="visitante.Endereco" ng-required="true"  />
+            </div>
+           <div class="col-md-6">
+                <label class="control-label">Sexo:</label>
+          
+                  <div  class="form-control" >
+                <input type="radio"  name="Sexo"  ng-model="visitante.Sexo" value="0"/> Masculino
+                 <input type="radio"  name="Sexo"  ng-model="visitante.Sexo" value="1" /> Feminino
+                  </div>  
+
+            </div>
+   
+   </fildset>
+
+
+<div class="col-md-12 text-right">
+    <hr />
+    <button type="button" class="btn btn-primary" ng-click="salvar()" title="Salvar">Salvar</button>
+    <a class="btn btn-warning" href="#/Visitante/">Voltar</a>
+</div>
+

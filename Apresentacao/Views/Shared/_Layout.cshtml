@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html ng-app="moduleApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+
+ @Styles.Render("~/Content/themes/base/css")
+    
+  
+    
+</head>
+<body>
+      <div class="container">
+    <header id="header" ng-controller="IndexController">
+        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/"><img src="~/Content/img/icon-car.png" alt="logo">   &copy;  Sistema de Portaria - Cadastro de Moradores e Visitantes    </a>
+
+                </div>
+               
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/">Principal</a></li>
+                        <li><a href="#/Morador">Morador</a></li>
+                        <li ><a href="#/Visitante">Visitante</a></li>
+                        <li><a href="#/VisitaMorador">Visita</a></li>
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">Admin <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="scroll"><a href="#/Funcionario">Funcionário</a></li>
+                                <li class="scroll"><a href="#/TipoServico">Tipo de Servico</a></li>
+                               
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+    </header><!--/header-->
+
+
+    <div class="container-fluid conteudo">
+        <div class="row-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    &copy; 2016 - Todos os direitos reservados
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+   
+    <div id="loading">
+        <div class="form-loading"></div>
+    </div>
+    
+
+        @Scripts.Render("~/bundles/jquery")
+         @Scripts.Render("~/bundles/angularJS")
+        @Scripts.Render("~/bundles/customJS")
+               @Scripts.Render("~/bundles/app")
+
+        @RenderSection("scripts", required: false)
+ 
+             <script src="~/Scripts/angularjs/jquery.mask.min.js"></script>
+ 
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
+    </script>
+
+          </div>
+    </body>
+</html>

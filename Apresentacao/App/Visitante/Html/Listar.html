@@ -1,0 +1,66 @@
+﻿
+ 
+<div ng-init="getAll()">
+
+
+    <fieldset>
+    <legend title="Filtros de pesquisa">Filtros de pesquisa </legend>
+
+   
+            <div class="col-md-12">
+                <label class="control-label">Critério de busca: </label>
+                <input type="text" id="visitante.Nome" name="visitante.Nome" class="form-control" placeholder="Critérios de busca"
+                       ng-model="criterioBusca" ng-required="true"  />
+            </div>
+
+ 
+            <div class="col-md-12 text-right">
+                <hr />
+                <a href="#/Visitante/Cadastrar" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Incluir</a>
+                <button type="button" id="btn-pesquisar" ng-click="pesquisar()" class="btn btn-primary" title="Procurar"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Pesquisar</button>
+            </div>
+ 
+</fieldset>
+
+
+
+       <div class="col-md-12">
+        <hr />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <th>
+                Nome
+            </th>
+            <th>
+                CPF
+            </th>
+             <th>
+                Endereço
+            </th>
+            
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="visitante in visitantes | filter: criterioBusca | orderBy:'Nome' " style="cursor:pointer" ng-click="redirecionar(morador)">
+                <td>
+                  <span ng-bind="visitante.Nome"></span>
+                </td>
+                <td>
+                   <span ng-bind="visitante.Cpf"></span>
+                </td>
+              <td>
+ <span ng-bind="visitante.Endereco"></span>
+              </td>
+                  
+              
+                  
+                <td style="text-align:center">
+                    <a href="#/Visitante/Cadastrar/{{visitante.Identificador}}" data-toggle="popover"  title="Editar" class="glyphicon glyphicon-edit"></a>
+                                 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+

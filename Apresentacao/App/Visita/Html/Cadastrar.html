@@ -1,0 +1,249 @@
+﻿<fildset>
+    <legend>Cadastro de Visitas a Morador</legend>
+ 
+       
+            <div class="col-sm-6" ng-show="exibirMorador">
+                <label class="control-label">Nome:</label>
+               
+                <span class="form-control">{{moradorSelecionado.Nome}}</span>
+               </div>
+              
+             <div class="col-sm-6" ng-show="exibirMorador">
+                <label class="control-label">Endereço:</label>
+               
+                <span class="form-control">{{moradorSelecionado.Endereco}}</span>
+               </div>
+ 
+        
+     
+        <div class="col-sm-12 text-left">
+            <a class="btn btn adicionar  " data-toggle="modal" data-target="#modalMorador">
+                <span class="glyphicon glyphicon-plus-sign"></span>  Selecione o morador
+ 
+            </a>
+        </div>
+ 
+    <hr />
+    
+            <div class="col-sm-6" ng-show="exibirVisitante">
+                <label class="control-label">Nome :</label>
+               
+                <span class="form-control">{{visitanteSelecionado.Nome}}</span>
+                         
+            </div>
+
+                 <div class="col-sm-6" ng-show="exibirVisitante">
+                <label class="control-label">Identidade :</label>
+               
+                <span class="form-control">{{visitanteSelecionado.Identidade}}</span>
+                         
+            </div>
+
+          
+   
+            <div class="col-sm-12 text-left">
+            <a class="btn btn adicionar  " data-toggle="modal" data-target="#modalVisitante">
+                <span class="glyphicon glyphicon-plus-sign"></span> Selecione o visitante
+               
+            </a> 
+             
+        </div>
+ 
+    <hr />
+ 
+            <div class="col-sm-6">
+                <label class="control-label">Entrada:</label>
+                <input type="text" id="Entrada" name="Entrada" class="form-control"
+                     ng-model="visitaMorador.Entrada " ng-required="true" calendar-time  format-Date />
+            </div>
+             <div class="col-sm-6">
+                <label class="control-label">Saída:</label>
+                <input type="text" id="Saida" name="Saida" class="form-control"
+                       ng-model="visitaMorador.Saida " ng-required="true" calendar-time  format-Date  />
+            </div>
+ 
+   </fildset>
+
+
+
+
+<div class="col-sm-12 text-right">
+    <hr />
+    <button type="button" class="btn btn-primary" ng-click="salvar()" title="Salvar">Salvar</button>
+    <a class="btn btn-warning" href="#/Visitante/">Voltar</a>
+</div>
+
+
+
+<div class="modal fade" id="modalVisitante">
+
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Pesquisar Visitante</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+                            <label class="control-label">Nome:</label>
+                            <input type="Nome" id="Nome" name="Nome" class="form-control"
+                                ng-model="visitante.Nome" ng-required="true" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Identidade:</label>
+                            <input type="Identidade" id="Identidade" name="Identidade" class="form-control"
+                                ng-model="visitante.Identidade" ng-required="true" />
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <hr />
+                <div>
+
+                    <table class="table table-bordered table-striped" ng-show="visitantes.length>0">
+                        <thead>
+                            <th>Nome
+                            </th>
+
+                            <th>Endereço
+                            </th>
+
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="visitante in visitantes " style="cursor: pointer">
+                                <td>
+                                    <span ng-bind="visitante.Nome"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="visitante.Identidade"></span>
+                                </td>
+
+
+                                <td style="text-align: center">
+                                    <a ng-click="selecionarVisitante(visitante)" data-toggle="popover" title="Selecionar" class="glyphicon glyphicon-check"></a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-center">
+                        <paging page="{{page}}" next-page="{{nextPage}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></paging>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
+                <input type="button" id="PesquisarVisitante" ng-click="pesquisarVisitante(visitante)" name="Pesquisar" value="Pesquisar"
+                    class="btn btn-primary" />
+
+                <a class="btn btn-primary" ng-click="novoVisitante()" ng-show="exibir">Novo Visitante</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modalMorador">
+
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="H1">Pesquisar Morador</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            <label class="control-label">Nome:</label>
+                            <input type="Nome" id="Nome" name="Nome" class="form-control"
+                                ng-model="morador.Nome" ng-required="true" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+
+                            <label class="control-label">Endereço:</label>
+                            <input type="Endereco" id="Endereco" name="Identidade" class="form-control"
+                                ng-model="morador.Endereco" ng-required="true" />
+
+                        </div>
+                    </div>
+
+                </div>
+                <hr />
+                <div>
+
+                    <table class="table table-bordered table-striped" ng-show="moradores.length>0">
+                        <thead>
+                            <th>Nome
+                            </th>
+
+                            <th>Endereço
+                            </th>
+
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="morador in moradores " style="cursor: pointer">
+                                <td>
+                                    <span ng-bind="morador.Nome"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="morador.Endereco"></span>
+                                </td>
+
+                                <td style="text-align: center">
+                                    <a ng-click="selecionarMorador(morador)" data-toggle="popover" title="Selecionar" class="glyphicon glyphicon-check"></a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-center">
+                        <paging page="{{page}}" next-page="{{nextPage}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></paging>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
+                <input type="button" id="PesquisarMorador" ng-click="pesquisarMorador()" name="Pesquisar" value="Pesquisar"
+                    class="btn btn-primary" />
+                <a class="btn btn-primary" ng-click="novoMorador()" ng-show="exibir">Novo Morador</a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
