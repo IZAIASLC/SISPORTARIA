@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="IVisitanteAcessoDados.cs" />
     <Compile Include="Mapeamento\MoradorMappingOverride.cs" />
+    <Compile Include="Mapeamento\VisitanteMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisitanteAcessoDados.cs" />
   </ItemGroup>

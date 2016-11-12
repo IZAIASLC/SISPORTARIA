@@ -1,6 +1,6 @@
 ﻿moduleApp.controller('CadastrarMoradorController',
 function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
-
+    $scope.NomePagina = "Morador";
     $scope.morador = {}
     $scope.dependente = {};
     $scope.morador.Dependentes = [];
@@ -15,17 +15,22 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
     
       
         //Edição
-        if ($routeParams.Identificador != undefined) {
+        if ($routeParams.identificador != undefined) {
 
             $scope.edicao = true;
            
-         //   $scope.pesquisar($routeParams.Identificador);
+          
 
             var callback = function (response) {
                 $scope.morador = response;
+ 
+                $scope.morador.DataNascimento = JsonDate($scope.morador.DataNascimento);
+ 
+                if ($scope.morador.Foto != null)
+                    $scope.morador.Foto = _arrayToBase64($scope.morador.Foto);
 
             }
-            dataService.get("Morador/ListarMorador/" + $routeParams.Identificador, {}, callback)
+            dataService.get("Morador/ListarMorador/" + $routeParams.identificador, {}, callback)
 
         }
         
@@ -33,6 +38,18 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
 
     
     $scope.inicial();
+
+
+    //Obtem os estados
+    var listaEstados = function () {
+        var callback = function (response) {
+            $scope.listaEstados = response;
+
+        }
+        dataService.get("Estado/ListarEstados/", {}, callback)
+    }
+
+    listaEstados();
 
 
     //Pesquisa pelo identificador
@@ -48,7 +65,7 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
     //Adicionar um novo dependente
     $scope.adicionar = function (dependente) {
 
-      
+ 
 
         if ($scope.dependente.Nome == undefined || $scope.dependente.Nome == '') {
             Modal.growl("Favor informar o nome do dependente", "alert");
@@ -67,11 +84,11 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
         });
 
         if (adicionado) {
-            Modal.growl("Nome já adicionado à lista", "alert");
+            sweetAlert("", "Nome já adicionado à lista", "warning");
             return;
         }
 
-       
+  
 
         if (dependente.Identificador > 0) {
             
@@ -96,7 +113,7 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
             delete $scope.dependente;
         }
       
-        $("#modalDependentes").modal('hide');
+      
 
       
        
@@ -107,62 +124,47 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
     $scope.salvar = function () {
 
         if ($scope.morador.Nome === undefined || $scope.morador.Nome === '') {
-            Modal.growl("Favor informar o nome do morador", "alert");
+            sweetAlert("", "Favor informar o nome do morador", "warning");
 
             return;
         }
 
-      
+        if ($scope.morador.DataNascimento === undefined || $scope.morador.DataNascimento === '') {
+            sweetAlert("", "Favor informar a data de nascimento do morador", "warning");
+
+            return;
+        }
+
 
         if ($scope.morador.Identidade === undefined || $scope.morador.Identidade === '') {
-            Modal.growl("Favor informar a identidade do morador", "alert");
+            sweetAlert("", "Favor informar a identidade do morador", "warning");
 
             return;
         }
 
         if ($scope.morador.Endereco === undefined || $scope.morador.Endereco === '') {
-            Modal.growl("Favor informar o endereco do morador", "alert");
+            sweetAlert("", "Favor informar o endereco do morador", "warning");
 
             return;
         }
         
 
         if ($scope.morador.Sexo === undefined || $scope.morador.Sexo === '') {
-            Modal.growl("Favor informar o sexo do morador", "alert");
+            sweetAlert("", "Favor informar o sexo do morador", "warning");
 
             return;
         }
 
      
-        if ($scope.morador.Cpf === undefined || $scope.morador.Cpf === '' ||$scope.morador.Cpf ===null) {
-           
-            $scope.prosseguirCadastro();
-           
-        } else {
-            //Validar o cpf
-            if (!validar_cpf($scope.morador.Cpf)) {
-                Modal.growl("CPF inválido", "alert");
-            }
-            else {
-
-                $scope.prosseguirCadastro();
-            }
-        }
-
-
-       
-    };
-
-    //Prosseguir com o cadastro
-    $scope.prosseguirCadastro = function () {
-
+        
+ 
         var obj = $scope.morador;
          obj.Dependentes = $scope.morador.Dependentes;
       
-        if ($routeParams.Identificador != undefined) {
+        if ($routeParams.identificador != undefined) {
             var callback = function (response) {
-                Modal.growl("Dados atualizados com sucesso", "alert");
-                window.location = "#/Morador/Cadastrar/" + $routeParams.Identificador;
+                sweetAlert("","Dados atualizados com sucesso", "warning");
+                window.location = "#/morador";
             }
 
 
@@ -171,9 +173,9 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
         } else {
 
             var callback = function (response) {
-                Modal.growl("Dados inseridos com sucesso", "alert");
+                sweetAlert("", "Dados inseridos com sucesso", "warning");
 
-                window.location = "#/Morador/Cadastrar/" + response;
+                window.location = "#/morador";
             }
 
             dataService.post(address, obj, callback)
@@ -198,10 +200,10 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
                 }
             } 
 
-            if( $routeParams.Identificador != undefined)
+            if( $routeParams.identificador != undefined)
             {
                 //Editando
-                dataService.get("Morador/VerificarCpfCadastrado" + "?parametro=" + $scope.morador.Cpf + "&identificador=" + $routeParams.Identificador, {}, callback);
+                dataService.get("Morador/VerificarCpfCadastrado" + "?parametro=" + $scope.morador.Cpf + "&identificador=" + $routeParams.identificador, {}, callback);
             }
             else
             {
@@ -213,6 +215,8 @@ function CadastrarMoradorController($scope, dataService, $routeParams,$filter) {
 
     $scope.editar = function (dependente) {
 
+        $('#modalDependentes').openModal();
+ 
         $scope.dependente = {};
         $scope.dependente.Identificador = dependente.Identificador;
         $scope.dependente.Nome = dependente.Nome;

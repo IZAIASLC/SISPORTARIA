@@ -5,105 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
 
- @Styles.Render("~/Content/themes/base/css")
-    
-  
-    
+    <link href="iconfonts/material-icons.css" media="all" rel="stylesheet" type="text/css" />
+
+    @*  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> *@
+
+
 </head>
 <body>
-      <div class="container">
-    <header id="header" ng-controller="IndexController">
-        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#/"><img src="~/Content/img/icon-car.png" alt="logo">   &copy;  Sistema de Portaria - Cadastro de Moradores e Visitantes    </a>
 
-                </div>
-               
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
+    <div class="navbar-fixed">
+
+          <nav>
+                  <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Logo</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="#/">Principal</a></li>
-                        <li><a href="#/Morador">Morador</a></li>
-                        <li ><a href="#/Visitante">Visitante</a></li>
-                        <li><a href="#/VisitaMorador">Visita</a></li>
+                        <li><a href="#/morador">Morador</a></li>
+                        <li><a href="#/visitante">Visitante</a></li>
+                        <li><a href="#/visita-morador">Visita</a></li>
                         <li>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="scroll"><a href="#/Funcionario">Funcionário</a></li>
                                 <li class="scroll"><a href="#/TipoServico">Tipo de Servico</a></li>
-                               
+
                             </ul>
                         </li>
 
                     </ul>
                 </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-    </header><!--/header-->
+                      </div>
+            </nav> 
 
-
-    <div class="container-fluid conteudo">
-        <div class="row-fluid">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                @RenderBody()
-            </div>
-        </div>
-    </div>
-
-
-    <footer id="footer">
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    &copy; 2016 - Todos os direitos reservados
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                        <li><a href="#"><i class="fa fa-flickr"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-github"></i></a></li>
+        @*<nav>
+            <ul class="hide-on-med-and-down">
+                <li><a href="#!">First Sidebar Link</a></li>
+                <li><a href="#!">Second Sidebar Link</a></li>
+            </ul>
+            <ul id="slide-out" class="side-nav fixed">
+                <li class="bold"><a href="#!" class="waves-effect waves-teal">First Sidebar Link</a></li>
+                <li class="bold"><a href="#!" class="">Second Sidebar Link</a></li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header waves-effect waves-teal">Dropdown<i class="mdi-navigation-arrow-drop-down"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">First</a></li>
+                                    <li><a href="#!">Second</a></li>
+                                    <li><a href="#!">Third</a></li>
+                                    <li><a href="#!">Fourth</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
-   
-    <div id="loading">
-        <div class="form-loading"></div>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+        </nav>*@
+
     </div>
-    
 
-        @Scripts.Render("~/bundles/jquery")
-         @Scripts.Render("~/bundles/angularJS")
-        @Scripts.Render("~/bundles/customJS")
-               @Scripts.Render("~/bundles/app")
 
-        @RenderSection("scripts", required: false)
- 
-             <script src="~/Scripts/angularjs/jquery.mask.min.js"></script>
- 
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
 
+
+
+            @RenderBody()
+
+
+
+        </div>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+
+    @Scripts.Render("~/bundles/sweetalert")
+
+    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/bundles/customJS")
+    @Scripts.Render("~/bundles/app")
+
+    @RenderSection("scripts", required: false)
     <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
+   
+        $('.button-collapse').sideNav({
+          //  menuWidth: 300, // Default is 240
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        }
+  );
+        $('.collapsible').collapsible();
 
+      
     </script>
 
-          </div>
-    </body>
+
+    @* <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.min.js"></script>*@
+    @*<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>*@
+
+   @*<script src="https://raw.githubusercontent.com/danguer/blog-examples/master/js/base64-binary.js"></script> *@
+
+      
+</body>
 </html>

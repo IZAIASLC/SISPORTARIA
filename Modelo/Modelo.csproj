@@ -44,10 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dependente.cs" />
+    <Compile Include="Dto\EstadoDto.cs" />
     <Compile Include="Dto\DependenteDto.cs" />
     <Compile Include="Dto\MoradorDto.cs" />
     <Compile Include="Dto\VisitaMoradorDto.cs" />
     <Compile Include="Dto\VisitanteDto.cs" />
+    <Compile Include="Estado.cs" />
     <Compile Include="Morador.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="VisitaMorador.cs" />

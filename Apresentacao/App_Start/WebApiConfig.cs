@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Cors;
+using Newtonsoft.Json.Converters;
 
+
+ 
 namespace Apresentacao
 {
     public static class WebApiConfig
@@ -19,6 +23,13 @@ namespace Apresentacao
             // To avoid processing unexpected or malicious queries, use the validation settings on QueryableAttribute to validate incoming queries.
             // For more information, visit http://go.microsoft.com/fwlink/?LinkId=279712.
             //config.EnableQuerySupport();
+
+         // var cors = new EnableCorsAttribute("www.example.com", "*", "*");
+           // config.EnableCors(cors);
+
+
+           
+           
         }
     }
 }

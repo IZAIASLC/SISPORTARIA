@@ -10,6 +10,7 @@ using Apresentacao.Utils;
 using System.Collections;
 namespace Apresentacao.Controllers
 {
+
     public class MoradorController : Controller
     {
         private IRepositorio<Morador> repositorioMorador;
@@ -37,12 +38,13 @@ namespace Apresentacao.Controllers
 
                 moradorDto.Identificador = morador.Identificador;
                 moradorDto.Nome = morador.Nome;
-                if(!string.IsNullOrWhiteSpace(morador.Cpf))
-                moradorDto.Cpf = Validacao.FormatarCPF(morador.Cpf);
+                
                 moradorDto.Identidade = morador.Identidade;
                 moradorDto.Sexo = morador.Sexo;
                 moradorDto.Endereco = morador.Endereco;
                 moradorDto.Foto = morador.Foto;
+                moradorDto.Estado = morador.Estado;
+                moradorDto.DataNascimento = morador.DataNascimento;
                 moradorDto.Dependentes = new List<DependenteDto>();
 
                 foreach (var dependente in morador.Dependentes)
@@ -76,12 +78,13 @@ namespace Apresentacao.Controllers
 
             moradorDto.Identificador = morador.Identificador;
             moradorDto.Nome = morador.Nome;
-            if (!string.IsNullOrWhiteSpace(morador.Cpf))
-            moradorDto.Cpf =Validacao.FormatarCPF(morador.Cpf);
+            
             moradorDto.Identidade = morador.Identidade;
             moradorDto.Sexo = morador.Sexo;
             moradorDto.Endereco = morador.Endereco;
             moradorDto.Foto = morador.Foto;
+            moradorDto.Estado = morador.Estado;
+            moradorDto.DataNascimento = morador.DataNascimento;
             moradorDto.Dependentes = new List<DependenteDto>();
 
             foreach (var dependente in morador.Dependentes)
@@ -158,8 +161,7 @@ namespace Apresentacao.Controllers
         [HttpPost]
         public void SalvarMorador(Morador morador)
         {
-            if (!string.IsNullOrWhiteSpace(morador.Cpf))
-            morador.Cpf =Validacao.RemoverCaracter(morador.Cpf);
+          
            
 
             repositorioMorador.Inserir(morador);
@@ -172,14 +174,14 @@ namespace Apresentacao.Controllers
             var moradorAtual = repositorioMorador.Consultar(morador.Identificador);
 
             moradorAtual.Nome = morador.Nome.ToUpper();
-            if (!string.IsNullOrWhiteSpace(morador.Cpf))
-                moradorAtual.Cpf = Validacao.RemoverCaracter(morador.Cpf);
-            else
-                moradorAtual.Cpf = "";
+            
             moradorAtual.Identidade = morador.Identidade;
             moradorAtual.Sexo = morador.Sexo;
             moradorAtual.Endereco = morador.Endereco;
             moradorAtual.Foto = morador.Foto;
+
+            moradorAtual.Estado = morador.Estado;
+            moradorAtual.DataNascimento = morador.DataNascimento;
 
             var listaDependenteRemover = new List<Dependente>();
             var listaDependenteAdicionar = new List<Dependente>();
@@ -239,7 +241,7 @@ namespace Apresentacao.Controllers
 
         //Verifica se o CPF já está cadastrado ao editar
         [HttpGet]
-        public bool VerificarCpfCadastrado(string parametro, int? identificador)
+        public bool VerificarIdentidadeCadastrada(string parametro, int? identificador)
         {
             bool retorno = false;
             var resultado = new List<Morador>();
@@ -248,11 +250,11 @@ namespace Apresentacao.Controllers
             if (identificador.Value > 0)
             {
               
-                resultado = repositorioMorador.Pesquisar(c => c.Cpf.ToUpper().Contains(Validacao.RemoverCaracterCnpj(parametro.ToUpper())) && c.Identificador != identificador).ToList();
+                resultado = repositorioMorador.Pesquisar(c => c.Identidade.ToUpper().Contains(parametro.ToUpper()) && c.Identificador != identificador).ToList();
             }
             else
             {
-                  resultado = repositorioMorador.Pesquisar(c => c.Cpf.ToUpper().Contains(Validacao.RemoverCaracterCnpj(parametro.ToUpper()))).ToList();
+                  resultado = repositorioMorador.Pesquisar(c => c.Identidade.ToUpper().Contains(parametro.ToUpper())).ToList();
 
             }
             

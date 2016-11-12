@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace Apresentacao.Controllers
 {
+
     public class VisitaMoradorController : Controller
     {
         private IRepositorio<VisitaMorador> repositorioVisitaMorador;

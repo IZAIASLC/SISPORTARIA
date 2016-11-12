@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Apresentacao.Controllers
 {
+   
     public class HomeController : Controller
     {
         //
@@ -15,11 +16,18 @@ namespace Apresentacao.Controllers
         public ActionResult Index()
         {
         // paginação http://begriffs.com/angular-paginate-anything/?page=2&perPage=5
-           
+
+           // System.Web.Security.FormsAuthentication.SetAuthCookie("03403028607", false);
+            System.Web.Security.FormsAuthentication.SignOut();
             return View();
         }
 
-       
+        public ActionResult Autenticar()
+        {
+             System.Web.Security.FormsAuthentication.SetAuthCookie("03403028607", false);
+           
+             return View();
+        }
 
     }
 }

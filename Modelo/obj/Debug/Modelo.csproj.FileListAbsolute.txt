@@ -23,4 +23,16 @@ E:\projetos\SisPortaria\Modelo\bin\Debug\Incra.Estrutura.Modelo.dll
 E:\projetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.dll
 E:\projetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.pdb
 G:\projetos\SisPortaria\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\bin\Debug\SisPortaria.Modelo.dll
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\bin\Debug\SisPortaria.Modelo.pdb
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\bin\Debug\Incra.Estrutura.Modelo.dll
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.dll
+D:\Documentos\MeusProjetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.pdb
+F:\projetos\SisPortaria\Modelo\bin\Debug\SisPortaria.Modelo.dll
+F:\projetos\SisPortaria\Modelo\bin\Debug\SisPortaria.Modelo.pdb
+F:\projetos\SisPortaria\Modelo\bin\Debug\Incra.Estrutura.Modelo.dll
+F:\projetos\SisPortaria\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+F:\projetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.dll
+F:\projetos\SisPortaria\Modelo\obj\Debug\SisPortaria.Modelo.pdb
 E:\projetos\SisPortaria\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache

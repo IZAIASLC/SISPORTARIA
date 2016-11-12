@@ -26,24 +26,22 @@ namespace Apresentacao
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+           // WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
 
+           
+           // GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(
+           //new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
 
+           // GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Culture = System.Globalization.CultureInfo.GetCultureInfo("pt-BR");
 
-
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(
-           new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Culture = System.Globalization.CultureInfo.GetCultureInfo("pt-BR");
-
-
-             
-
+            
+          
+            
 
             InicializarConteiner();
         }

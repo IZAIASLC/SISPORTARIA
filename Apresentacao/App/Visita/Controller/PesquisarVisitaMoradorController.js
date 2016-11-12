@@ -12,7 +12,7 @@ function PesquisarVisitaMoradorController($scope, dataService) {
         dataService.get(address,{}, callback)
     };
 
- 
+    $scope.getAll();
    
     $scope.pesquisar = function () {
 

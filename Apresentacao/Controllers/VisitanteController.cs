@@ -4,13 +4,16 @@ using Modelo.Dto;
 using SisPortaria.Modelo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Apresentacao.Controllers
 {
-    public class VisitanteController : Controller
+
+    public class VisitanteController : LargeJsonResult
     {
         private IRepositorio<Visitante> repositorioVisitante;
 
@@ -31,11 +34,12 @@ namespace Apresentacao.Controllers
                 var visitanteAtual = new Visitante();
                 visitanteAtual.Identificador = visitante.Identificador;
                 visitanteAtual.Nome = visitante.Nome;
-                if (!string.IsNullOrWhiteSpace(visitante.Cpf))
-                visitanteAtual.Cpf= Validacao.RemoverCaracter(visitante.Cpf);
+                
                 visitanteAtual.Identidade = visitante.Identidade;
                 visitanteAtual.Sexo = visitante.Sexo;
                 visitanteAtual.Foto = visitante.Foto;
+                visitanteAtual.DataNascimento = visitante.DataNascimento;
+                visitanteAtual.Estado = visitante.Estado;
                 listaVisitante.Add(visitanteAtual);
             }
 
@@ -43,7 +47,7 @@ namespace Apresentacao.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListarVisitante(int identificador)
+        public ActionResult ListarVisitanteId(int identificador)
         {
             var visitanteAtual = repositorioVisitante.Consultar(identificador);
 
@@ -51,14 +55,13 @@ namespace Apresentacao.Controllers
 
             visitante.Identificador = visitanteAtual.Identificador;
             visitante.Nome = visitanteAtual.Nome;
-            if (!string.IsNullOrWhiteSpace(visitanteAtual.Cpf))
-            visitante.Cpf =  Validacao.FormatarCPF(visitanteAtual.Cpf);
+           
             visitante.Identidade = visitanteAtual.Identidade;
             visitante.Foto = visitanteAtual.Foto;
             visitante.Sexo = visitanteAtual.Sexo;
-           
-
-            return Json(visitante, JsonRequestBehavior.AllowGet);
+            visitante.DataNascimento = visitanteAtual.DataNascimento;
+            visitante.Estado = visitanteAtual.Estado;
+            return this.retornarJson(visitante);
         }
 
         [HttpGet]
@@ -102,37 +105,61 @@ namespace Apresentacao.Controllers
 
 
         [HttpPost]
+       [ValidateInput(false)]
         public void SalvarVisitante(Visitante visitante)
         {
-            if (!string.IsNullOrWhiteSpace(visitante.Cpf))
-                visitante.Cpf = Validacao.RemoverCaracter(visitante.Cpf);
+
+            //foreach (string file in Request.Files)
+            //{
+            //    var fileContent = Request.Files[file];
+            //    if (fileContent != null && fileContent.ContentLength > 0)
+            //    {
+            //        var inputStream = fileContent.InputStream;
+            //        var fileName = Path.GetFileName(file);
+            //        var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
+            //        using (var fileStream = System.IO.File.Create(path))
+            //        {
+            //            inputStream.CopyTo(fileStream);
+            //        }
+            //    }
+            //}
+
+
+           
             
             repositorioVisitante.Inserir(visitante);
 
         }
 
+
+     
+        byte[]  LoadFileBytes(string base64)
+        {
+            byte[] array = Encoding.ASCII.GetBytes(base64);
+
+            return array;
+        }
+
+
         [HttpPut]
         public void AtualizarVisitante(Visitante visitante)
         {
             var visitanteAtual = repositorioVisitante.Consultar(visitante.Identificador);
-
+ 
             visitanteAtual.Nome = visitante.Nome;
-            if (!string.IsNullOrWhiteSpace(visitante.Cpf))
-                visitanteAtual.Cpf = Validacao.RemoverCaracter(visitante.Cpf);
-            else
-                visitanteAtual.Cpf = "";
-
+ 
             visitanteAtual.Identidade = visitante.Identidade;
             visitanteAtual.Sexo = visitante.Sexo;
             visitanteAtual.Foto = visitante.Foto;
-
+            visitanteAtual.Estado = visitante.Estado;
+            visitanteAtual.DataNascimento = visitante.DataNascimento;
             repositorioVisitante.Atualizar(visitanteAtual);
 
         }
 
         //Verifica se o CPF já está cadastrado ao editar
         [HttpGet]
-        public bool VerificarCpfCadastrado(string parametro, int? identificador)
+        public bool VerificarIdentidadeCadastrada(string parametro, int? identificador)
         {
             bool retorno = false;
             var resultado = new List<Visitante>();
@@ -141,11 +168,11 @@ namespace Apresentacao.Controllers
             if (identificador.Value > 0)
             {
 
-                resultado = repositorioVisitante.Pesquisar(c => c.Cpf.ToUpper().Contains(Validacao.RemoverCaracterCnpj(parametro.ToUpper())) && c.Identificador != identificador).ToList();
+                resultado = repositorioVisitante.Pesquisar(c => c.Identidade.ToUpper().Contains(parametro.ToUpper()) && c.Identificador != identificador).ToList();
             }
             else
             {
-                resultado = repositorioVisitante.Pesquisar(c => c.Cpf.ToUpper().Contains(Validacao.RemoverCaracterCnpj(parametro.ToUpper()))).ToList();
+                resultado = repositorioVisitante.Pesquisar(c => c.Identidade.ToUpper().Contains(parametro.ToUpper())).ToList();
 
             }
 

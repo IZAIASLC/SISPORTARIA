@@ -8,11 +8,12 @@ namespace SisPortaria.Modelo
     public class Morador:Entidade
     {
         public virtual string Nome { get; set; }
-        public virtual string Cpf { get; set; }
         public virtual string Identidade { get; set; }
         public virtual int Sexo { get; set; }
         public virtual byte[] Foto { get; set; }
         public virtual string Endereco { get; set; }
+        public virtual DateTime DataNascimento { get; set; }
+        public virtual Estado Estado { get; set; }
 
         public virtual IList<Dependente> Dependentes { get; set; }
 
